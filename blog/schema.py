@@ -11,9 +11,18 @@ class PostType(DjangoObjectType):
 
 
 class AuthorType(DjangoObjectType):
+    is_active = graphene.Boolean()
+    just_text = graphene.String()
+
     class Meta:
         model = Author
         fields = "__all__"
+
+    def resolve_is_active(self, info):
+        return True
+
+    def resolve_just_text(self, info):
+        return "Just a text"
 
 
 class CreateAuthor(graphene.Mutation):
