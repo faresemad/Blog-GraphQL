@@ -33,7 +33,7 @@ class Query(graphene.ObjectType):
     all_authors = graphene.List(AuthorType)
     all_posts = graphene.List(PostType)
 
-    def resolvev_all_authors(self, info):
+    def resolve_all_authors(self, info):
         return Author.objects.all()
 
     def resolve_all_posts(self, info):
