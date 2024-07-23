@@ -98,3 +98,16 @@ pre-commit autoupdate
 ```bash
 pre-commit run --all-files
 ```
+
+
+### Create Author in GraphQL Server by using GraphiQL
+```graphql
+mutation{
+  createAuthor(name:"fares"){
+    author{
+      id,
+      name
+    }
+  }
+}
+```
