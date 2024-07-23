@@ -29,6 +29,21 @@ class CreateAuthor(graphene.Mutation):
         return CreateAuthor(author=author)
 
 
+class CreatePost(graphene.Mutation):
+    class Arguments:
+        title = graphene.String()
+        content = graphene.String()
+        author_id = graphene.ID()
+
+    post = graphene.Field(PostType)
+
+    def mutate(self, info, title, content, author_id):
+        post = Post(title=title, content=content, author_id=author_id)
+        post.save()
+
+        return CreatePost(post=post)
+
+
 class Query(graphene.ObjectType):
     all_authors = graphene.List(AuthorType)
     all_posts = graphene.List(PostType)
@@ -42,6 +57,7 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     create_author = CreateAuthor.Field()
+    create_post = CreatePost.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
