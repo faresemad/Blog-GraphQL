@@ -101,6 +101,7 @@ pre-commit run --all-files
 
 
 ### Create Author in GraphQL Server by using GraphiQL
+- Create Author
 ```graphql
 mutation{
   createAuthor(name:"fares"){
@@ -108,6 +109,15 @@ mutation{
       id,
       name
     }
+  }
+}
+```
+- Query All Authors
+```graphql
+query{
+  allAuthors{
+    id,
+    name
   }
 }
 ```
