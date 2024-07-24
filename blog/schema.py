@@ -75,12 +75,16 @@ class UpdatePost(graphene.Mutation):
 class Query(graphene.ObjectType):
     all_authors = graphene.List(AuthorType)
     all_posts = graphene.List(PostType)
+    auther_by_id = graphene.Field(AuthorType, id=graphene.ID())
 
     def resolve_all_authors(self, info):
         return Author.objects.all()
 
     def resolve_all_posts(self, info):
         return Post.objects.all()
+
+    def resolve_auther_by_id(self, info, id):
+        return Author.objects.get(pk=id)
 
 
 class Mutation(graphene.ObjectType):
