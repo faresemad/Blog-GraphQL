@@ -132,3 +132,11 @@ mutation{
   }
 }
 ```
+- Retrieve Author by ID
+```graphql
+query{
+  autherById(id:1){
+    name
+  }
+}
+```
