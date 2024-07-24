@@ -121,3 +121,14 @@ query{
   }
 }
 ```
+- Update Post
+```graphql
+mutation{
+  updatePost(id:1, title:"updated",content:"anyupdate"){
+    post{
+      id
+      title
+    }
+  }
+}
+```
