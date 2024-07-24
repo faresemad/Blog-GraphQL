@@ -61,10 +61,12 @@ class UpdatePost(graphene.Mutation):
 
     post = graphene.Field(PostType)
 
-    def mutate(self, info, title, content, id):
+    def mutate(self, info, id, title=None, content=None):
         post = Post.objects.get(pk=id)
-        post.title = title
-        post.content = content
+        if title is not None:
+            post.title = title
+        if content is not None:
+            post.content = content
         post.save()
 
         return UpdatePost(post=post)
