@@ -72,6 +72,18 @@ class UpdatePost(graphene.Mutation):
         return UpdatePost(post=post)
 
 
+class DeletePost(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+
+    post = graphene.Field(PostType)
+
+    def mutate(self, info, id):
+        post = Post.objects.get(pk=id)
+        post.delete()
+        return DeletePost(post=None)
+
+
 class Query(graphene.ObjectType):
     all_authors = graphene.List(AuthorType)
     all_posts = graphene.List(PostType)
@@ -95,6 +107,7 @@ class Mutation(graphene.ObjectType):
     create_author = CreateAuthor.Field()
     create_post = CreatePost.Field()
     update_post = UpdatePost.Field()
+    delete_post = DeletePost.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
